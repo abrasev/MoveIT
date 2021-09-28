@@ -1,0 +1,63 @@
+﻿@model BuisnessLayer.ViewModels.MoveProposalListViewModel;
+
+    <a class="btn btn-primary" asp-controller="MoveProposal" asp-action="Add">Add Price Inquery</a>
+<br />
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Distance</th>
+            <th scope="col">Living Area</th>
+            <th scope="col">Attic</th>
+            <th scope="col">Cars Needed</th>
+            <th scope="col">Piano</th>
+            <th scope="col">Price</th>
+            <th scope="col">Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var moveProposal in Model.MoveProposal)
+            {
+                int price = 0;
+                int distPrice;
+                int carsNeeded = ((moveProposal.LivingArea + (moveProposal.AtticArea * 2)) / 50) + 1;
+                if (moveProposal.Distance < 50)
+                {
+                    distPrice = 1000 + (moveProposal.Distance * 10);
+                }else if (moveProposal.Distance > 50 || moveProposal.Distance < 100){
+                    distPrice = 5000 + (moveProposal.Distance * 8);
+                }
+                else
+                {
+                    distPrice = 10000 + (moveProposal.Distance * 7);
+                }
+                price = distPrice * carsNeeded;
+                string piano;
+                if (moveProposal.Piano)
+                {
+                    piano = "Yes";
+                }
+                else piano = "No";
+
+                <tr>
+                    <td>@moveProposal.MoveFrom</td>
+                    <td>@moveProposal.MoveTo</td>
+                    <td>@moveProposal.Distance km</td>
+                    <td>@moveProposal.LivingArea sm2</td>
+                    <td>@moveProposal.AtticArea sm2</td>
+                    <td>@moveProposal.CarsNeeded</td>
+                    <td>@piano</td>
+                    <td>@price MKD</td>
+                    <td><a class="btn btn-info" asp-controller="MoveProposal" asp-action="Details" asp-route-id="@moveProposal.Id">Details</a></td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
