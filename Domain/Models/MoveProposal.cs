@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Domain.Models
 {
     public class MoveProposal
-    {        
+    {
         public Guid Id { get; set; }
         [MaxLength(20)]
         public string MoveFrom { get; set; }
@@ -27,7 +27,7 @@ namespace Domain.Models
                 int result = ((liv + (att * 2)) / 50) + 1;
                 return result;
             }
-        }    
+        }
         public bool Piano { get; set; }
         public string CreatedBy { get; set; }
     }

@@ -49,11 +49,6 @@ namespace MoveIt.Controllers
             }
             return RedirectToAction("Index");
         }
-        [HttpGet]
-        public IActionResult Details(Guid id)
-        {
-            var moveProposal = _moveProposalService.GetById(id);
-            return View(moveProposal);
-        }
+        
     }
 }
